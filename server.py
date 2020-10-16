@@ -2,6 +2,16 @@ import markov
 import discord
 import os
 
+# Run a webserver on a separate thread for heroku
+import threading
+from os import environ
+from flask import Flask
+
+app = Flask(__name__)
+worker = getattr(app, 'run')
+t = threading.Thread(target=worker, args=[environ.get('PORT')])
+t.start()
+
 client = discord.Client()
 markov = markov.Markov()
 
@@ -33,3 +43,5 @@ async def on_message(message):
     #     await message.channel.send('Hello!')
 
 client.run(os.getenv("ALAN_TEXT_TOKEN"))
+
+print("hi")
