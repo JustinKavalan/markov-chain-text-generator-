@@ -43,5 +43,3 @@ async def on_message(message):
     #     await message.channel.send('Hello!')
 
 client.run(os.getenv("ALAN_TEXT_TOKEN"))
-
-print("hi")
